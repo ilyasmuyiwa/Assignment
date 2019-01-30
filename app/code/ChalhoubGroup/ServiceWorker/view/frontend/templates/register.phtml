@@ -1,0 +1,41 @@
+<?php /** @var \ChalhoubGroup\ServiceWorker\Block\Register $block */ ?>
+<?php $productImage = $block->getMedia(); ?>
+<?php if ($block->isEnable()): ?>
+    <script type="text/javascript">
+        // <![CDATA[
+        require([
+            'jquery',
+            'domReady!'
+        ], function ($) {
+            var images = document.getElementsByTagName('img');
+            var prodimage = "catalog/product";
+            var srcList = [];
+            for(var i = 0; i < images.length; i++) {
+                if(images[i].src.indexOf(prodimage) === -1) {
+                    srcList.push(images[i].src);
+                }
+
+            }
+            var product_array = <?php echo json_encode($productImage); ?>;
+            var all_image_array  = srcList.concat(product_array);
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.ready.then(function(reg) {
+                    reg.active.postMessage(JSON.stringify({img_array: all_image_array}));
+                });
+                navigator.serviceWorker
+                    .register('<?php echo $block->getServiceWorkerJs() ?>').then(function(sw) {
+
+                    })
+                    .catch(function (err) {
+                        console.log('Service worker registration failed: ', err);
+                    });
+
+
+
+            }
+
+        });
+        // ]]>
+    </script>
+<?php endif; ?>
+

@@ -1,0 +1,37 @@
+var image_array;
+self.cacheAllImages = function () {
+    if (self.image_array && self.cache) {
+        self.cache.addAll(self.image_array);
+
+    }
+}
+self.addEventListener('message', function(event){
+    var data = JSON.parse(event.data);
+    self.image_array = data.img_array;
+    self.cacheAllImages();
+});
+self.addEventListener('install', function(event){
+    event.waitUntil(
+        caches.open('chalhoub')
+            .then(function (cache) {
+                self.cache = cache;
+                self.cacheAllImages();
+            })
+    )
+});
+
+self.addEventListener('fetch', function (event) {
+    event.respondWith(
+        caches.match(event.request)
+            .then(function (response) {
+                if(response) {
+                    return response;
+                } else {
+                    return fetch(event.request);
+                }
+            })
+            .catch(function (err) {
+                console.log('Fail to fetch.... ', err);
+            })
+    );
+})
