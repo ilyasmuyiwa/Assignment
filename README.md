@@ -5,7 +5,7 @@
    ```
    docker-compose up -d --build
    ```
-* Import the Database. The Database name magento.sql is located at the root. Import into database name magento. You can use phpmyAdmin at 
+* Import the Database. The Database name magento.sql is located at the root of the repository. Import into database name magento. You can use phpmyAdmin at 
   127.0.0.1:8080
 * Connect to web container CLI
  ```
