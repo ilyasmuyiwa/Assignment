@@ -21,9 +21,9 @@ self.addEventListener('install', function(event){
 });
 
 self.addEventListener('fetch', function (event) {
-if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin') { // handle chrome latest bug
-return;
-}
+ if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin') { // handle chrome latest bug
+ return;
+ }
     event.respondWith(
         caches.match(event.request)
             .then(function (response) {
