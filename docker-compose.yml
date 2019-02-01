@@ -7,7 +7,7 @@ services:
     user: application
     environment:
     - WEB_ALIAS_DOMAIN=local.domain.com
-    - WEB_DOCUMENT_ROOT=/app/pub
+    - WEB_DOCUMENT_ROOT=/app/
     - PHP_DATE_TIMEZONE=EST
     - PHP_DISPLAY_ERRORS=1
     - PHP_MEMORY_LIMIT=2048M
