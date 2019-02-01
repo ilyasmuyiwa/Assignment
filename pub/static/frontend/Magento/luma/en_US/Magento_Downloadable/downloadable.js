@@ -1,0 +1,1 @@
+/app/vendor/magento/module-downloadable/view/frontend/web/downloadable.js
