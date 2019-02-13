@@ -18,7 +18,7 @@ class SelectionFactory
      *
      * @var string
      */
-    protected $_instanceName = null;
+           protected $_instanceName = null;
 
     /**
      * Factory constructor
